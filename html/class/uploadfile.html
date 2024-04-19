@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload File</title>
+    <script lang="javascript">
+        function f1(){
+        var f =  document.getElementById("myfile").value;
+        f = f.replace(/^.*\\/,"");
+        document.getElementById("mypic").src=f;
+        }
+    </script>
+</head>
+<body style="margin-top: 30px;">
+    <center>
+        <input type="file" id="myfile" onchange="f1()">
+        <br>
+        <img id="mypic" style="margin-top: 100px ;box-shadow: 5px 5px 5px black;">
+    </center>
+</body>
+</html>

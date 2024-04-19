@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Demo</title>
+    <script lang="javascript">
+        function f1(){
+            var v = document.getElementById("middletextinput").value;
+            document.getElementById("toptextinput").value=v;
+            document.getElementById("bottomtextinput").value=v;
+        }
+        function f2(){
+            if(document.getElementById("toptextinput").style.backgroundColor!="red"){
+
+                document.getElementById("toptextinput").style.backgroundColor="red";            
+                document.getElementById("bottomtextinput").style.backgroundColor="red";
+            }
+            else{
+                document.getElementById("toptextinput").style.backgroundColor="white";            
+                document.getElementById("bottomtextinput").style.backgroundColor="white";
+            }
+
+        }
+        function f3(){
+
+            document.getElementById("toptextinput").style.fontStyle="italic";
+            document.getElementById("middletextinput").style.fontStyle="italic";
+            document.getElementById("bottomtextinput").style.fontStyle="italic";
+            
+        }
+
+    </script>
+</head>
+<body>
+    <form action="#" method="post">
+
+       <div class="toptext">
+        <input type="text" id="toptextinput" readonly>
+       </div>
+
+       <div class="middletext">
+        <input type="text" id="middletextinput" oninput="f1()">
+       </div>
+
+       <div class="bottomtext">
+        <input type="text" id="bottomtextinput" readonly>
+       </div>
+
+      <div>
+        <input type="button" value="font-style" onclick="f3()">
+        <input type="button" value="backgoundColor" onclick="f2()">
+        <input type="reset">
+      </div>
+
+        
+
+       
+    </form>
+</body>
+</html>

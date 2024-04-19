@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div name="formSection" id="formSection" style="padding: 20px;width: 600px;height: 700px;background-color: lightgray;">
+
+        <form name="forEntry"  id="forEntry" action="processor.html" method="get" 
+
+            <fieldset>
+                <legend><h1>Basic Inputs</h1></legend>
+
+                <p>
+                    <label for="usrname">User Name : </label>
+                    <input type="text" name="usrname" id="usrname" value="" autofocus tabindex="1">
+
+                </p>
+
+                <p>
+                    <label for="usrname">Password :&nbsp;&nbsp;&nbsp; </label>
+                    <input type="text" name="password" id="usrname" value="" >
+
+                </p>
+
+                <p>
+                    <label for="gender">Gender :&nbsp;&nbsp;&nbsp; </label>
+                    <input type="radio" name="gender" id="gender" value="m" checked>Male
+
+                    <input type="radio" name="gender" id="gender" value="f" >Female
+
+                </p>
+
+                <p>
+                    <label for="hobbies">Hobbies :&nbsp;&nbsp;&nbsp;&nbsp; </label>
+                    <input type="checkbox" name="hobbies" id="hobbies" value="p" checked >Playing
+
+                    <input type="checkbox" name="hobbies" id="hobbies" value="r" autofocus tabindex="2" >Reading
+
+                    <input type="checkbox" name="hobbies" id="hobbies" value="m" >Music
+
+                </p>
+
+                <p>
+                    <label for="course">Course</label>
+                    <select name="course" id="course">
+                        <option value="j">Java</option>
+                        <option value="c">C</option>
+                        <option value="p">Python</option>
+
+                    </select>
+                </p>
+
+                <p>
+                    <label for="address">Address</label>
+                    <textarea name="address" id="address" cols="30" rows="5"></textarea>
+                </p>
+            </fieldset>
+
+            <fieldset>
+                <legend><h1>Advance Inputs</h1></legend>
+                <p>
+                    <label for="mail">Email</label>
+                    <input type="email" name="mail" id="mail">
+
+                </p>
+                <p>
+                    <label for="urls">Webiste link</label>
+                    <input type="url" name="urls" id="urls">
+
+                </p>
+                <p>
+                    <label for="colors">Color</label>
+                    <input type="color" name="colors" id="colors">
+                </p>
+
+                <p>
+                    <label for="resume">Resume</label>
+                    <input type="file" name="resume" id="resume">
+                </p>
+            </fieldset>
+
+            <fieldset>
+                <legend><h1>Submit / Reset</h1></legend>
+                <p>
+                    <input type="submit" name="submit" id="submit">
+                    <input type="reset" name="reset">
+                    <input type="image" src="submit.png" style="width: 100px;padding-left:50px   ;">
+                </p>
+            </fieldset>
+
+
+
+        </form>
+    </div>
+</body>
+</html>

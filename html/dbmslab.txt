@@ -1,0 +1,681 @@
+NAME : RAKESH 
+CLASS : C2
+ROLL : 28
+ID : B200637
+
+
+
+
+------------------------------------------------------------------------
+EMPLOYEE DB
+
+1) display the names of employees who are working for both productX and productY projects
+
+select Fname ,Mname ,Lname from employee where Ssn in (select Essn from works_on where Pno in (select Pnumber from project where Pname="ProductX")) and Ssn in(select Essn from works_on where Pno in (select Pnumber from project where Pname="ProductY"));
+	
++-------+-------+---------+
+| Fname | Mname | Lname   |
++-------+-------+---------+
+| John  | B     | Smith   |
+| Joyce | A     | English |
++-------+-------+---------+
+2 rows in set (0.00 sec)
+
+
+--------------------------------------------------------------------
+
+2) Display the total no .of hours worked by each employee on the projects;
+
+select e.Fname ,sum(hours) Total_working_hours from employee e join works_on w on e.Ssn=w.Essn group by w.Essn;
+
++----------+---------------------+
+| Fname    | Total_working_hours |
++----------+---------------------+
+| John     |                40.0 |
+| Franklin |                40.0 |
+| Joyce    |                40.0 |
+| Ramesh   |                40.0 |
+| James    |                NULL |
+| Jennifer |                35.0 |
+| Ahmad    |                40.0 |
+| Alicia   |                40.0 |
++----------+---------------------+
+8 rows in set (0.00 sec)
+--------------------------------------------------------------------------
+
+3) display the dept no , dept name ,manager name ,manager address for each department
+
+select d.Dnumber,d.Dname,e.Fname ,e.Mname ,e.Lname ,e.Address from employee e join department d on e.Dno = d.Dnumber;
+
++---------+----------------+----------+-------+---------+-------------------------+
+| Dnumber | Dname          | Fname    | Mname | Lname   | Address                 |
++---------+----------------+----------+-------+---------+-------------------------+
+|       4 | Administration | Jennifer | S     | Wallace | 291 Berry, Bellaire,TX  |
+|       4 | Administration | Ahmad    | V     | Jabbar  | 980 Dallas, Houston,TX  |
+|       4 | Administration | Alicia   | J     | Zelaya  | 3321 Castle, Spring,TX  |
+|       1 | Headquarters   | James    | E     | Borg    | 450 Stone, Houston,TX   |
+|       5 | Research       | John     | B     | Smith   | 731 Fondren, Houston,TX |
+|       5 | Research       | Franklin | T     | Wong    | 638 Voss, Houston,TX    |
+|       5 | Research       | Joyce    | A     | English | 5631 Rice, Houston,TX   |
+|       5 | Research       | Ramesh   | K     | Narayan | 975 Fire Oak, Humble,TX |
++---------+----------------+----------+-------+---------+-------------------------+
+8 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------
+
+4) for the project located at "Houston" , display the controlling department name and no .of employees working in that department;
+
+select d.Dname,count(*) no_of_employee from department d join project p on d.Dnumber=p.Dnum join employee e on e.Dno=p.Dnum where p.Plocation="Houston" group by e.Dno;
+
++--------------+----------------+
+| Dname        | no_of_employee |
++--------------+----------------+
+| Research     |              4 |
+| Headquarters |              1 |
++--------------+----------------+
+2 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------
+
+
+sailors DB
+
+
+1) display following boat wise BID,no.of boats reserved by sailors by that boat ;
+
+mysql> SELECT BID,COUNT(*) NO_OF_BOATS_RESERVATIONS FROM RESERVES GROUP BY BID;
+
++-----+--------------------------+
+| BID | NO_OF_BOATS_RESERVATIONS |
++-----+--------------------------+
+| 101 |                        2 |
+| 102 |                        3 |
+| 103 |                        3 |
+| 104 |                        2 |
++-----+--------------------------+
+4 rows in set (0.00 sec)
+
+------------------------------------------------------------------------------------------
+
+2) DISPLAY THE NAME AND COLOR OF THE BOAT RESERVED BY SAILORS WITH RATING 10
+
+SELECT BNAME,COLOR FROM BOATS WHERE BID IN (SELECT BID FROM RESERVES WHERE SID IN (SELECT SID FROM SAILORS WHERE RATING = 10));
+
+Empty set (0.01 sec)
+
+-------------------------------------------------------------------------------------------
+
+3) DISPLAY THE RATING OF SAILORS WHO HAVE RESERVED ALL THE BOATS
+
+
+SELECT RATING FROM SAILORS WHERE SID IN (SELECT SID FROM RESERVES GROUP BY SID HAVING COUNT(*)=(SELECT COUNT(*) FROM BOATS));
+
++--------+
+| RATING |
++--------+
+|      7 |
++--------+
+
+
+
+
+--------------------------------------------------------------------------------------------
+
+4) ADD AN ATTRIBUTE IN THE SAILORS TABLE "ADDRESS" STRING AND UPDATE VALUE WITH "HOUSTON" FOR THE SAILORS WHOSE NAME STARTS WITH "D"
+
+ALTER TABLE SAILORS ADD COLUMN ADDRESS VARCHAR(20);
+
+UPDATE SAILORS SET ADDRESS="HOUSTON" WHERE SNAME LIKE "D%";
+
++-----+---------+--------+------+---------+
+| SID | SNAME   | RATING | AGE  | ADDRESS |
++-----+---------+--------+------+---------+
+|  22 | DUSTIN  |      7 |   45 | HOUSTON |
+|  29 | BRUTUS  |      1 |   33 | NULL    |
+|  31 | LUBBER  |      8 | 55.5 | NULL    |
+|  32 | ANDY    |      8 | 25.5 | NULL    |
+|  58 | RUSTY   |     10 |   35 | NULL    |
+|  64 | HORATIO |      7 |   35 | NULL    |
+|  71 | ZOBRA   |     10 |   16 | NULL    |
+|  74 | HORATIO |      9 |   40 | NULL    |
+|  85 | ART     |      3 | 25.5 | NULL    |
+|  95 | BOB     |      3 | 63.5 | NULL    |
++-----+---------+--------+------+---------+
+10 rows in set (0.00 sec)
+
+
+
+
+
+------------------------------------------------------
+
+COMMAND LINE INFO
+-----------------------------------------------------
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.35-0ubuntu0.23.10.1 (Ubuntu)
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use dbms;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select * from project;
++-----------------+---------+-----------+------+
+| Pname           | Pnumber | Plocation | Dnum |
++-----------------+---------+-----------+------+
+| ProductX        |       1 | Bellaire  |    5 |
+| ProductY        |       2 | Sugarland |    5 |
+| ProductZ        |       3 | Houston   |    5 |
+| Computarization |      10 | Stafford  |    4 |
+| Reorganization  |      20 | Houston   |    1 |
+| Newbenefits     |      30 | Stafford  |    4 |
++-----------------+---------+-----------+------+
+6 rows in set (0.00 sec)
+
+mysql> select * from works_on;
++-----------+-----+-------+
+| Essn      | Pno | hours |
++-----------+-----+-------+
+| 123456789 |   1 |  32.5 |
+| 123456789 |   2 |   7.5 |
+| 333445555 |   2 |  10.0 |
+| 333445555 |   3 |  10.0 |
+| 333445555 |  10 |  10.0 |
+| 333445555 |  20 |  10.0 |
+| 453453453 |   1 |  20.0 |
+| 453453453 |   2 |  20.0 |
+| 666884444 |   3 |  40.0 |
+| 888665555 |  20 |  NULL |
+| 987654321 |  20 |  15.0 |
+| 987654321 |  30 |  20.0 |
+| 987987987 |  10 |  35.0 |
+| 987987987 |  30 |   5.0 |
+| 999887777 |  10 |  10.0 |
+| 999887777 |  30 |  30.0 |
++-----------+-----+-------+
+16 rows in set (0.00 sec)
+mysql> 
+mysql> 
+mysql>  where Pname="Produc))
+mysql> 
+mysql> 
+mysql> select Fname,Mname ,Lname from employee where Ssn in (select Essn from works_on where Pno in (select Pnumber from project where Pnmae="ProductX) and Pno in (select Pnumber from project where Pname="ProductY"));
+    "> ;
+    "> ^C
+mysql> select Fname,Mname ,Lname from employee where Ssn in (select Essn from works_on where Pno in (select Pnumber from project where Pnmae="ProductX") and Pno in (select Pnumber from project where Pname="ProductY"));
+ERROR 1054 (42S22): Unknown column 'Pnmae' in 'where clause'
+mysql> select Fname,Mname ,Lname from employee where Ssn in (select Essn from works_on where Pno in (select Pnumber from project where Pname="ProductX") and Pno in (select Pnumber from project where Pname="ProductY"));
+Empty set (0.00 sec)
+
+mysql> select * from project;
++-----------------+---------+-----------+------+
+| Pname           | Pnumber | Plocation | Dnum |
++-----------------+---------+-----------+------+
+| ProductX        |       1 | Bellaire  |    5 |
+| ProductY        |       2 | Sugarland |    5 |
+| ProductZ        |       3 | Houston   |    5 |
+| Computarization |      10 | Stafford  |    4 |
+| Reorganization  |      20 | Houston   |    1 |
+| Newbenefits     |      30 | Stafford  |    4 |
++-----------------+---------+-----------+------+
+6 rows in set (0.00 sec)
+
+mysql> select * from works_on;
++-----------+-----+-------+
+| Essn      | Pno | hours |
++-----------+-----+-------+
+| 123456789 |   1 |  32.5 |
+| 123456789 |   2 |   7.5 |
+| 333445555 |   2 |  10.0 |
+| 333445555 |   3 |  10.0 |
+| 333445555 |  10 |  10.0 |
+| 333445555 |  20 |  10.0 |
+| 453453453 |   1 |  20.0 |
+| 453453453 |   2 |  20.0 |
+| 666884444 |   3 |  40.0 |
+| 888665555 |  20 |  NULL |
+| 987654321 |  20 |  15.0 |
+| 987654321 |  30 |  20.0 |
+| 987987987 |  10 |  35.0 |
+| 987987987 |  30 |   5.0 |
+| 999887777 |  10 |  10.0 |
+| 999887777 |  30 |  30.0 |
++-----------+-----+-------+
+16 rows in set (0.00 sec)
+
+mysql> select * from works_on;
++-----------+-----+-------+
+| Essn      | Pno | hours |
++-----------+-----+-------+
+| 123456789 |   1 |  32.5 |
+| 123456789 |   2 |   7.5 |
+| 333445555 |   2 |  10.0 |
+| 333445555 |   3 |  10.0 |
+| 333445555 |  10 |  10.0 |
+| 333445555 |  20 |  10.0 |
+| 453453453 |   1 |  20.0 |
+| 453453453 |   2 |  20.0 |
+| 666884444 |   3 |  40.0 |
+| 888665555 |  20 |  NULL |
+| 987654321 |  20 |  15.0 |
+| 987654321 |  30 |  20.0 |
+| 987987987 |  10 |  35.0 |
+| 987987987 |  30 |   5.0 |
+| 999887777 |  10 |  10.0 |
+| 999887777 |  30 |  30.0 |
++-----------+-----+-------+
+16 rows in set (0.00 sec)
+
+mysql> select * from employee;
++----------+-------+---------+-----------+------------+-------------------------+------+----------+-----------+-----+
+| Fname    | Mname | Lname   | Ssn       | Bdate      | Address                 | Sex  | Salary   | Super_ssn | Dno |
++----------+-------+---------+-----------+------------+-------------------------+------+----------+-----------+-----+
+| John     | B     | Smith   | 123456789 | 1965-01-09 | 731 Fondren, Houston,TX | M    | 30000.00 | 333445555 |   5 |
+| Franklin | T     | Wong    | 333445555 | 1955-12-08 | 638 Voss, Houston,TX    | F    | 40000.00 | 888665555 |   5 |
+| Joyce    | A     | English | 453453453 | 1972-07-31 | 5631 Rice, Houston,TX   | F    | 25000.00 | 333445555 |   5 |
+| Ramesh   | K     | Narayan | 666884444 | 1962-09-15 | 975 Fire Oak, Humble,TX | M    | 38000.00 | 333445555 |   5 |
+| James    | E     | Borg    | 888665555 | 1937-11-10 | 450 Stone, Houston,TX   | M    | 55000.00 | NULL      |   1 |
+| Jennifer | S     | Wallace | 987654321 | 1941-06-20 | 291 Berry, Bellaire,TX  | F    | 43000.00 | 888665555 |   4 |
+| Ahmad    | V     | Jabbar  | 987987987 | 1969-03-29 | 980 Dallas, Houston,TX  | M    | 25000.00 | 987654321 |   4 |
+| Alicia   | J     | Zelaya  | 999887777 | 1968-01-19 | 3321 Castle, Spring,TX  | F    | 25000.00 | 987654321 |   4 |
++----------+-------+---------+-----------+------------+-------------------------+------+----------+-----------+-----+
+8 rows in set (0.00 sec)
+
+mysql> select Fname ,Mname ,Lname from employee where Ssn in (select Essn from works_on where Pno in (select Pnumber from project where Pname="ProductX")) and Ssn in(select Essn from works_on where Pno in (select Pnumber from project where Pname="ProductY"));
++-------+-------+---------+
+| Fname | Mname | Lname   |
++-------+-------+---------+
+| John  | B     | Smith   |
+| Joyce | A     | English |
++-------+-------+---------+
+2 rows in set (0.00 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_dbms |
++----------------+
+| department     |
+| dependent      |
+| dept_locations |
+| employee       |
+| project        |
+| works_on       |
++----------------+
+6 rows in set (0.00 sec)
+
+mysql> select e.Fname ,sum(hours) from employee e join works_on w on e.Ssn=w.Essn ;
+ERROR 1140 (42000): In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'dbms.e.Fname'; this is incompatible with sql_mode=only_full_group_by
+mysql> select e.Fname ,sum(hours) from employee e join works_on w on e.Ssn=w.Essn group by w.Essn;
++----------+------------+
+| Fname    | sum(hours) |
++----------+------------+
+| John     |       40.0 |
+| Franklin |       40.0 |
+| Joyce    |       40.0 |
+| Ramesh   |       40.0 |
+| James    |       NULL |
+| Jennifer |       35.0 |
+| Ahmad    |       40.0 |
+| Alicia   |       40.0 |
++----------+------------+
+8 rows in set (0.00 sec)
+
+mysql> select e.Fname ,sum(hours) Total_working_hours from employee e join works_on w on e.Ssn=w.Essn group by w.Essn;
++----------+---------------------+
+| Fname    | Total_working_hours |
++----------+---------------------+
+| John     |                40.0 |
+| Franklin |                40.0 |
+| Joyce    |                40.0 |
+| Ramesh   |                40.0 |
+| James    |                NULL |
+| Jennifer |                35.0 |
+| Ahmad    |                40.0 |
+| Alicia   |                40.0 |
++----------+---------------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from department;
++----------------+---------+-----------+----------------+
+| Dname          | Dnumber | mgr_ssn   | Mgr_start_date |
++----------------+---------+-----------+----------------+
+| Headquarters   |       1 | 888665555 | 1981-06-19     |
+| Administration |       4 | 987654321 | 1995-01-01     |
+| Research       |       5 | 333445555 | 1988-05-22     |
++----------------+---------+-----------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> select d.Dnumber,d.Dname,e.Fname ,e.Mname ,e.Lname ,e.Addres from employee e join department d on e.Dno = d.Dnumber;
+ERROR 1054 (42S22): Unknown column 'e.Addres' in 'field list'
+mysql> select d.Dnumber,d.Dname,e.Fname ,e.Mname ,e.Lname ,e.Address from employee e join department d on e.Dno = d.Dnumber;
++---------+----------------+----------+-------+---------+-------------------------+
+| Dnumber | Dname          | Fname    | Mname | Lname   | Address                 |
++---------+----------------+----------+-------+---------+-------------------------+
+|       4 | Administration | Jennifer | S     | Wallace | 291 Berry, Bellaire,TX  |
+|       4 | Administration | Ahmad    | V     | Jabbar  | 980 Dallas, Houston,TX  |
+|       4 | Administration | Alicia   | J     | Zelaya  | 3321 Castle, Spring,TX  |
+|       1 | Headquarters   | James    | E     | Borg    | 450 Stone, Houston,TX   |
+|       5 | Research       | John     | B     | Smith   | 731 Fondren, Houston,TX |
+|       5 | Research       | Franklin | T     | Wong    | 638 Voss, Houston,TX    |
+|       5 | Research       | Joyce    | A     | English | 5631 Rice, Houston,TX   |
+|       5 | Research       | Ramesh   | K     | Narayan | 975 Fire Oak, Humble,TX |
++---------+----------------+----------+-------+---------+-------------------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employee;
++----------+-------+---------+-----------+------------+-------------------------+------+----------+-----------+-----+
+| Fname    | Mname | Lname   | Ssn       | Bdate      | Address                 | Sex  | Salary   | Super_ssn | Dno |
++----------+-------+---------+-----------+------------+-------------------------+------+----------+-----------+-----+
+| John     | B     | Smith   | 123456789 | 1965-01-09 | 731 Fondren, Houston,TX | M    | 30000.00 | 333445555 |   5 |
+| Franklin | T     | Wong    | 333445555 | 1955-12-08 | 638 Voss, Houston,TX    | F    | 40000.00 | 888665555 |   5 |
+| Joyce    | A     | English | 453453453 | 1972-07-31 | 5631 Rice, Houston,TX   | F    | 25000.00 | 333445555 |   5 |
+| Ramesh   | K     | Narayan | 666884444 | 1962-09-15 | 975 Fire Oak, Humble,TX | M    | 38000.00 | 333445555 |   5 |
+| James    | E     | Borg    | 888665555 | 1937-11-10 | 450 Stone, Houston,TX   | M    | 55000.00 | NULL      |   1 |
+| Jennifer | S     | Wallace | 987654321 | 1941-06-20 | 291 Berry, Bellaire,TX  | F    | 43000.00 | 888665555 |   4 |
+| Ahmad    | V     | Jabbar  | 987987987 | 1969-03-29 | 980 Dallas, Houston,TX  | M    | 25000.00 | 987654321 |   4 |
+| Alicia   | J     | Zelaya  | 999887777 | 1968-01-19 | 3321 Castle, Spring,TX  | F    | 25000.00 | 987654321 |   4 |
++----------+-------+---------+-----------+------------+-------------------------+------+----------+-----------+-----+
+8 rows in set (0.00 sec)
+
+mysql> (select d.Dname ,e.Dno from employee e join department d on e.Dno = d.Dnumber join project p on d.Dnumber = p.Dnum where p.Dnum in (select Dnum from project where Plocation like "%Houston%") group by e.Dno);
++--------------+-----+
+| Dname        | Dno |
++--------------+-----+
+| Research     |   5 |
+| Headquarters |   1 |
++--------------+-----+
+2 rows in set (0.01 sec)
+
+mysql> select use PROJECT1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'use PROJECT1' at line 1
+mysql> use PROJECT1;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> SELECT BID,COUNT(*) NO_OF_BOATS FROM RESERVES GROUP BY BID;
++-----+-------------+
+| BID | NO_OF_BOATS |
++-----+-------------+
+| 101 |           2 |
+| 102 |           3 |
+| 103 |           3 |
+| 104 |           2 |
++-----+-------------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT BID,COUNT(*) NO_OF_BOATS_RESERVATIONS FROM RESERVES GROUP BY BID;
++-----+--------------------------+
+| BID | NO_OF_BOATS_RESERVATIONS |
++-----+--------------------------+
+| 101 |                        2 |
+| 102 |                        3 |
+| 103 |                        3 |
+| 104 |                        2 |
++-----+--------------------------+
+4 rows in set (0.00 sec)
+
+mysql> +-----+--------------------------+
+    -> | BID | NO_OF_BOATS_RESERVATIONS |
+    -> +-----+--------------------------+
+    -> | 101 |                        2 |
+    -> | 102 |                        3 |
+    -> | 103 |                        3 |
+    -> | 104 |                        2 |
+    -> +-----+--------------------------+
+    -> 4 rows in set (0.00 sec);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '+-----+--------------------------+
+| BID | NO_OF_BOATS_RESERVATIONS |
++-----+---' at line 1
+mysql> SELECT * FROM BOATS;
++------+-----------+-------+
+| BID  | BNAME     | COLOR |
++------+-----------+-------+
+|  101 | INTERLAKE | BLUE  |
+|  102 | INTERLAKE | RED   |
+|  103 | CLIPPER   | GREEN |
+|  104 | MARINE    | RED   |
++------+-----------+-------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT BNAME,BCOLOR FROM BOATS WHERE BID IN (SELECT BID FROM RESERVES WHERE SID IN (SELECT SID FROM SAILORS WHERE RATING = 10));
+ERROR 1054 (42S22): Unknown column 'BCOLOR' in 'field list'
+mysql> SELECT BNAME,COLOR FROM BOATS WHERE BID IN (SELECT BID FROM RESERVES WHERE SID IN (SELECT SID FROM SAILORS WHERE RATING = 10));
+Empty set (0.01 sec)
+
+mysql> ^C
+mysql> SELECT * FROM SAILORS;
++-----+---------+--------+------+
+| SID | SNAME   | RATING | AGE  |
++-----+---------+--------+------+
+|  22 | DUSTIN  |      7 |   45 |
+|  29 | BRUTUS  |      1 |   33 |
+|  31 | LUBBER  |      8 | 55.5 |
+|  32 | ANDY    |      8 | 25.5 |
+|  58 | RUSTY   |     10 |   35 |
+|  64 | HORATIO |      7 |   35 |
+|  71 | ZOBRA   |     10 |   16 |
+|  74 | HORATIO |      9 |   40 |
+|  85 | ART     |      3 | 25.5 |
+|  95 | BOB     |      3 | 63.5 |
++-----+---------+--------+------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM RESEREVES;
+ERROR 1146 (42S02): Table 'PROJECT1.RESEREVES' doesn't exist
+mysql> SELECT * FROM RESERVES;
++-----+-----+------------+
+| SID | BID | DAY        |
++-----+-----+------------+
+|  22 | 101 | 1998-10-10 |
+|  22 | 102 | 1998-10-10 |
+|  22 | 103 | 1998-10-08 |
+|  22 | 104 | 1998-10-07 |
+|  31 | 102 | 1998-11-10 |
+|  31 | 103 | 1998-11-06 |
+|  31 | 104 | 1998-11-12 |
+|  64 | 101 | 1998-09-05 |
+|  64 | 102 | 1998-09-08 |
+|  74 | 103 | 1998-09-08 |
++-----+-----+------------+
+10 rows in set (0.00 sec)
+
+mysql> ALTER TABLE SAILORS ADD COLUMN ADDRESS VARCHAR(20);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM SAILORS;
++-----+---------+--------+------+---------+
+| SID | SNAME   | RATING | AGE  | ADDRESS |
++-----+---------+--------+------+---------+
+|  22 | DUSTIN  |      7 |   45 | NULL    |
+|  29 | BRUTUS  |      1 |   33 | NULL    |
+|  31 | LUBBER  |      8 | 55.5 | NULL    |
+|  32 | ANDY    |      8 | 25.5 | NULL    |
+|  58 | RUSTY   |     10 |   35 | NULL    |
+|  64 | HORATIO |      7 |   35 | NULL    |
+|  71 | ZOBRA   |     10 |   16 | NULL    |
+|  74 | HORATIO |      9 |   40 | NULL    |
+|  85 | ART     |      3 | 25.5 | NULL    |
+|  95 | BOB     |      3 | 63.5 | NULL    |
++-----+---------+--------+------+---------+
+10 rows in set (0.00 sec)
+
+mysql> UPDATE SAILORS SET ADDRESS="HOUSTON" WHERE SNAME LIKE "D%";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM SAILORS;
++-----+---------+--------+------+---------+
+| SID | SNAME   | RATING | AGE  | ADDRESS |
++-----+---------+--------+------+---------+
+|  22 | DUSTIN  |      7 |   45 | HOUSTON |
+|  29 | BRUTUS  |      1 |   33 | NULL    |
+|  31 | LUBBER  |      8 | 55.5 | NULL    |
+|  32 | ANDY    |      8 | 25.5 | NULL    |
+|  58 | RUSTY   |     10 |   35 | NULL    |
+|  64 | HORATIO |      7 |   35 | NULL    |
+|  71 | ZOBRA   |     10 |   16 | NULL    |
+|  74 | HORATIO |      9 |   40 | NULL    |
+|  85 | ART     |      3 | 25.5 | NULL    |
+|  95 | BOB     |      3 | 63.5 | NULL    |
++-----+---------+--------+------+---------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT RATING FROM SAILORS WHERE SID IN (SELECT SID FROM RESERVES GROUP BY SID HAVING COUNT(*)=(SELECT COUNT(*) FROM BOATS));
++--------+
+| RATING |
++--------+
+|      7 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM PROJECT;
+ERROR 1146 (42S02): Table 'PROJECT1.PROJECT' doesn't exist
+mysql> use dbms;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select * from project ;
++-----------------+---------+-----------+------+
+| Pname           | Pnumber | Plocation | Dnum |
++-----------------+---------+-----------+------+
+| ProductX        |       1 | Bellaire  |    5 |
+| ProductY        |       2 | Sugarland |    5 |
+| ProductZ        |       3 | Houston   |    5 |
+| Computarization |      10 | Stafford  |    4 |
+| Reorganization  |      20 | Houston   |    1 |
+| Newbenefits     |      30 | Stafford  |    4 |
++-----------------+---------+-----------+------+
+6 rows in set (0.00 sec)
+
+mysql> select * from project where Pname="Houston";
+Empty set (0.00 sec)
+
+mysql> select * from project where Plocation="Houston";
++----------------+---------+-----------+------+
+| Pname          | Pnumber | Plocation | Dnum |
++----------------+---------+-----------+------+
+| ProductZ       |       3 | Houston   |    5 |
+| Reorganization |      20 | Houston   |    1 |
++----------------+---------+-----------+------+
+2 rows in set (0.00 sec)
+
+mysql> select d.Dname,d.Dnumber,count(*) no_of_employee from department d join project p on d.Dnumber=p.Dnum join employee e on e.Dno=p.Dnum where p.Plocation="Houston" group by e.Dno;
++--------------+---------+----------------+
+| Dname        | Dnumber | no_of_employee |
++--------------+---------+----------------+
+| Research     |       5 |              4 |
+| Headquarters |       1 |              1 |
++--------------+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> select d.Dname,count(*) no_of_employee from department d join project p on d.Dnumber=p.Dnum join employee e on e.Dno=p.Dnum where p.Plocation="Houston" group by e.Dno;
++--------------+----------------+
+| Dname        | no_of_employee |
++--------------+----------------+
+| Research     |              4 |
+| Headquarters |              1 |
++--------------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> USE PROJECT1;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> SELECT * FROM SAILORS;
++-----+---------+--------+------+---------+
+| SID | SNAME   | RATING | AGE  | ADDRESS |
++-----+---------+--------+------+---------+
+|  22 | DUSTIN  |      7 |   45 | HOUSTON |
+|  29 | BRUTUS  |      1 |   33 | NULL    |
+|  31 | LUBBER  |      8 | 55.5 | NULL    |
+|  32 | ANDY    |      8 | 25.5 | NULL    |
+|  58 | RUSTY   |     10 |   35 | NULL    |
+|  64 | HORATIO |      7 |   35 | NULL    |
+|  71 | ZOBRA   |     10 |   16 | NULL    |
+|  74 | HORATIO |      9 |   40 | NULL    |
+|  85 | ART     |      3 | 25.5 | NULL    |
+|  95 | BOB     |      3 | 63.5 | NULL    |
++-----+---------+--------+------+---------+
+10 rows in set (0.00 sec)
+
+mysql> select Fname ,Mname ,Lname from employee where Ssn in (select Essn from works_on where Pno in (select Pnumber from project where Pname="ProductX")) and Ssn in(select Essn from works_on where Pno in (select Pnumber from project where Pname="ProductY"));
+ERROR 1146 (42S02): Table 'PROJECT1.employee' doesn't exist
+mysql> USE dbms;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select Fname ,Mname ,Lname from employee where Ssn in (select Essn from works_on where Pno in (select Pnumber from project where Pname="ProductX")) and Ssn in(select Essn from works_on where Pno in (select Pnumber from project where Pname="ProductY"));
++-------+-------+---------+
+| Fname | Mname | Lname   |
++-------+-------+---------+
+| John  | B     | Smith   |
+| Joyce | A     | English |
++-------+-------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from project;
++-----------------+---------+-----------+------+
+| Pname           | Pnumber | Plocation | Dnum |
++-----------------+---------+-----------+------+
+| ProductX        |       1 | Bellaire  |    5 |
+| ProductY        |       2 | Sugarland |    5 |
+| ProductZ        |       3 | Houston   |    5 |
+| Computarization |      10 | Stafford  |    4 |
+| Reorganization  |      20 | Houston   |    1 |
+| Newbenefits     |      30 | Stafford  |    4 |
++-----------------+---------+-----------+------+
+6 rows in set (0.00 sec)
+
+mysql> select * from works_on;
++-----------+-----+-------+
+| Essn      | Pno | hours |
++-----------+-----+-------+
+| 123456789 |   1 |  32.5 |
+| 123456789 |   2 |   7.5 |
+| 333445555 |   2 |  10.0 |
+| 333445555 |   3 |  10.0 |
+| 333445555 |  10 |  10.0 |
+| 333445555 |  20 |  10.0 |
+| 453453453 |   1 |  20.0 |
+| 453453453 |   2 |  20.0 |
+| 666884444 |   3 |  40.0 |
+| 888665555 |  20 |  NULL |
+| 987654321 |  20 |  15.0 |
+| 987654321 |  30 |  20.0 |
+| 987987987 |  10 |  35.0 |
+| 987987987 |  30 |   5.0 |
+| 999887777 |  10 |  10.0 |
+| 999887777 |  30 |  30.0 |
++-----------+-----+-------+
+16 rows in set (0.00 sec)
+
+mysql> select * from employee;
++----------+-------+---------+-----------+------------+-------------------------+------+----------+-----------+-----+
+| Fname    | Mname | Lname   | Ssn       | Bdate      | Address                 | Sex  | Salary   | Super_ssn | Dno |
++----------+-------+---------+-----------+------------+-------------------------+------+----------+-----------+-----+
+| John     | B     | Smith   | 123456789 | 1965-01-09 | 731 Fondren, Houston,TX | M    | 30000.00 | 333445555 |   5 |
+| Franklin | T     | Wong    | 333445555 | 1955-12-08 | 638 Voss, Houston,TX    | F    | 40000.00 | 888665555 |   5 |
+| Joyce    | A     | English | 453453453 | 1972-07-31 | 5631 Rice, Houston,TX   | F    | 25000.00 | 333445555 |   5 |
+| Ramesh   | K     | Narayan | 666884444 | 1962-09-15 | 975 Fire Oak, Humble,TX | M    | 38000.00 | 333445555 |   5 |
+| James    | E     | Borg    | 888665555 | 1937-11-10 | 450 Stone, Houston,TX   | M    | 55000.00 | NULL      |   1 |
+| Jennifer | S     | Wallace | 987654321 | 1941-06-20 | 291 Berry, Bellaire,TX  | F    | 43000.00 | 888665555 |   4 |
+| Ahmad    | V     | Jabbar  | 987987987 | 1969-03-29 | 980 Dallas, Houston,TX  | M    | 25000.00 | 987654321 |   4 |
+| Alicia   | J     | Zelaya  | 999887777 | 1968-01-19 | 3321 Castle, Spring,TX  | F    | 25000.00 | 987654321 |   4 |
++----------+-------+---------+-----------+------------+-------------------------+------+----------+-----------+-----+
+8 rows in set (0.00 sec)
+

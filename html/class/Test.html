@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script lang="javascript">
+        function f3(){
+            var v = document.getElementById("pwd");
+            if(v.type=="password"){
+                v.type="text"
+            }else{
+                v.type="password"
+            }
+        }
+        function f4(){
+            var v = document.getElementById("file1").value;
+            v = v.replace(/^.*\\/,"");
+            
+            var im = document.getElementById("myimg");
+            im.src=v;
+            im.style.width =200;
+            im.style.height=200;
+        }
+        function f5(){
+            var im = document.getElementById("myimg").src="";
+            document.getElementById("file1").value="";
+        }
+        function f1(){
+            var v = document.getElementById("img1");
+            v.style.width="400px";
+            v.style.height="400px";
+        }
+        function f2(){
+            var v = document.getElementById("img1");
+            v.style.width="200px";
+            v.style.height="200px";
+        }
+        function usr(){
+            document.getElementById("usrname").value = document.getElementById("usrname").value.toUpperCase();
+        }
+        function change1(){
+            document.getElementById("img2").src="sad.png";
+        }
+        function change2(){
+            document.getElementById("img2").src="happy.png";
+        }
+    </script>
+</head>
+<body>
+    <form >
+        
+        <input type="range"  min="1" value="50" max="100" oninput="this.nextElementSibling.value=this.value">
+        <output>0</output>
+
+        <input list="browsers" name="browser" id="browser">
+        <datalist id="browsers">
+            <option value="Edge"></option>
+            <option value="Chrome"></option>
+            <option value="FireFox"></option>
+            <option value="Opera"></option>
+        </datalist>
+        
+    </form>
+</body>
+</html>

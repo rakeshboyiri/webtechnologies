@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colors Demo</title>
+</head>
+<style type="text/css">
+    body{
+        margin: 0px;
+        background-color: black;
+    }
+    .container{
+        width: 10%;
+        background-color: gray;
+        margin: auto;
+        margin-top: 150px;
+        padding-top: 1px;
+        padding-bottom: 20px;
+      
+        
+        
+    }
+    .redlight{
+        width: 50px;
+        height: 50px;
+        background-color: black;
+        border-radius: 100%;
+        margin-top: 20px;
+        margin-left: 45px;
+
+        
+    }
+
+    .yellowlight{
+        width: 50px;
+        height: 50px;
+        background-color: black;
+        border-radius: 100%;
+        margin-top: 20px;
+        margin-left: 45px;
+
+        
+    }
+
+    .greenlight{
+        width: 50px;
+        height: 50px;
+        background-color: black;
+        border-radius: 100%;
+        margin-top: 20px;
+        margin-left: 45px;
+        
+
+        
+    }
+    .div1{
+        width: 50%;       
+        margin: auto;
+        text-align: center;
+        margin-top: 50px;
+        
+    }
+    button{
+        border-radius: 10px;
+        width: 90px;
+        height: 40px;
+        background-color: cyan;
+    }
+
+</style>
+<script lang="javascript">
+    function f1(val){
+        if(val=="stop"){
+            document.getElementById("redlight").style.backgroundColor="red";
+            document.getElementById("yellowlight").style.backgroundColor="black";
+            document.getElementById("greenlight").style.backgroundColor="black";
+        }
+        if (val=="slow"){
+            document.getElementById("redlight").style.backgroundColor="black";
+            document.getElementById("yellowlight").style.backgroundColor="yellow";
+            document.getElementById("greenlight").style.backgroundColor="black";
+        }
+         if(val=="start"){
+            document.getElementById("redlight").style.backgroundColor="black";
+            document.getElementById("yellowlight").style.backgroundColor="black";
+            document.getElementById("greenlight").style.backgroundColor="green";
+        }
+        if(val=="reset"){
+            document.getElementById("redlight").style.backgroundColor="black";
+            document.getElementById("yellowlight").style.backgroundColor="black";
+            document.getElementById("greenlight").style.backgroundColor="black";
+        }
+    }
+    function f2(){
+        for(var i = 0;i<5;i++){
+            const spe =["1","@","#","$","%","^","&","*","(",")","{","}","-","/"];
+            for(var i = 0;i<5;i++){
+                if(i.toString() in spe){
+                    alert("Found");
+                }
+            }
+        }
+    }
+
+    
+
+</script>
+<body onload="f2()">
+    <div class="container">
+        <div class="redlight" id="redlight">
+           
+        </div>
+        <div class="yellowlight" id="yellowlight">
+            
+        </div>
+        <div class="greenlight" id="greenlight">
+          
+        </div>
+    </div>
+    <div class="div1">
+    <button id="stop" onclick="f1('stop')">Stop</button>
+    <button id="slow" onclick="f1('slow')"> Slow</button>
+    <button id="start" onclick="f1('start')">Start</button>
+    <button id="reset" onclick="f1('reset')"> Reset</button>
+    </div>
+    <button onclick="f2()">Check</button>
+</body>
+</html>

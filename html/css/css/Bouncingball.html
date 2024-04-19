@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouncing Ball demo</title>
+    <style type="text/css">
+        body{
+            background-color: gray;
+        }
+        .container{
+            width: 40%;
+            height: 200px;
+            background-color: cyan;
+            border-left: 15px solid black;
+            border-right: 15px solid black;
+            border-bottom: 15px solid black;
+            margin: 100px auto;
+        }
+        .black{
+           
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+
+            background-color: black;
+            animation-name: black;
+            animation-duration: 4s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;          
+            
+        }
+
+
+        @keyframes black{
+            0%{
+                transform: perspective(400px) translate(0px,0px);
+                
+            }
+            25%{
+                transform: perspective(400px) translate(125px,170px);
+                background-color: yellow;
+            }
+            50%{
+                transform: perspective(400px) translate(237px,0px);
+                background-color: red;
+            }
+            75%{
+                transform: perspective(400px) translate(125px,170px);
+                background-color: green;
+            }
+            100%{
+                transform: perspective(400px) translate(0px,0px);
+                
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="black">
+                
+        </div>
+    </div>
+</body>
+</html>

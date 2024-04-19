@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <title>Mouse Event</title>
+     <script lang="javascript">
+          function f1(){
+               document.getElementById("images").src="sad.png"
+          }
+          function f2(){
+               document.getElementById("images").src="happy.png";
+          }
+
+     </script>
+</head>
+<body style="margin-top: 200px;">
+    <center>
+          <img src="happy.png" id="images" width="200px" onmouseover="f1()" onmouseout="f2()">
+    </center>
+</body>
+</html>

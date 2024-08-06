@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Faculty Members</title>
+</head>
+<body>
+    <h2>Find Faculty Members</h2>
+    <form action="findFaculty.jsp" method="post">
+        <label for="department">Select Department:</label>
+        <select id="department" name="department" required>
+            <option value="">-- Select Department --</option>
+            <option value="cse">cse</option>
+            <option value="ece">ece</option>
+          
+            <!-- Add more departments as needed -->
+        </select>
+        <br><br>
+        <button type="submit">Find Faculty</button>
+    </form>
+    <a href="Retrieve.jsp">Retrive</a>
+</body>
+</html>

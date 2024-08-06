@@ -1,0 +1,55 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.admin-div {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.admin-div form {
+  display: flex;
+  gap: 10px;
+}
+
+.startbutton, .stopbutton {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.startbutton {
+  background-color: #28a745;
+  color: white;
+}
+
+.startbutton:hover {
+  background-color: #218838;
+}
+
+.stopbutton {
+  background-color: #dc3545;
+  color: white;
+}
+
+.stopbutton:hover {
+  background-color: #c82333;
+}
+
+p {
+  font-size: 32px;
+  color: red;
+}
+

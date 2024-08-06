@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script lang="javascript">
+        function f1(){
+            var val = document.getElementById("text1").value;
+            if(val==""){
+                var p = document.getElementById("p1");
+                p.innerHTML = "Filed cannot be empty";
+                p.style.color = "red";
+            }
+            }
+    </script>
+</head>
+<body>
+    <form action="">
+        <input type="text" id="text1" name="text1" onsubmit="f1();"><p id="p1" name="p1"></p>
+    </form>
+</body>
+</html>

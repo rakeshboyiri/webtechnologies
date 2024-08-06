@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rakesh IT Solutins</title>
+    <style type="text/css">
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            color: white;
+        }
+        body{
+            background-color: black;
+            color: white;
+        }
+        header{
+            background-color: rgb(51, 48, 48);
+            min-width: 100%;
+            height: 60px;
+            font-size: 6vh;
+            font-family: sans-serif;
+            line-height: 60px;
+            text-align: center;
+        }
+        nav{
+            width: 100%;
+            background-color:rgb(30, 29, 29);
+            height: 50px;
+            overflow: hidden;
+        }
+        nav > ul > li{
+            display: inline-block;
+            margin:0px 1% 0px 16% ;
+            line-height: 50px;
+           
+            
+        }
+        nav > ul > li:hover{
+            background-color: green;
+            
+        }
+        nav > ul > li > a{
+            text-decoration: none;
+        }
+        .container{
+            width: 60%;
+           height: 300px;
+           margin: 20px 0% 30px 20%;
+           background-color: rgb(47, 46, 46);
+           padding-top: 120px;
+           padding-left:0px ;
+           border-radius: 50px;
+           box-shadow: 0px 0px 20px cyan;
+          
+          
+        }
+        .container > span{
+            font-size: 25pt;
+            margin-left: 28%;
+            
+        }
+        .container > span>a{
+            text-decoration: none;
+        }
+        .container > span:hover{
+            background-color: blue;
+        }
+        h1{
+            margin-top: 70px;
+            text-align: center;
+        }
+        input{
+            margin-left: 50px;
+        }
+        label{
+            margin-left: 100px;
+        }
+        #submit{
+            margin-left: 200px;
+            color: black;
+            font-size: 14pt;
+        }
+        
+    </style>
+</head>
+<body>
+   <header>Rakesh IT Solutions</header>
+   <nav>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Solutions</a></li>
+    </ul>
+   </nav>
+   <h1>Reset Username</h1>
+   <div class="container">
+    <label for="usrid">Enter your Id : </label>
+    <input type="number" id="usrid" placeholder="Enter user Id ... " style="color:black"> <br>
+    <label for="oldusrname">Enter your Id : </label>
+    <input type="text" id="oldusrname" placeholder="Enter old Username ... " style="color:black"><br>
+    <label for="newusrname">Enter your Id : </label>
+    <input type="text" id="newusrname" placeholder="Enter New Username ... " style="color:black"> <br>
+    
+    <input type="submit" id="submit" value="Update">
+       
+   </div>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rakesh IT Solutins</title>
+    <style type="text/css">
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            color: white;
+        }
+        body{
+            background-color: black;
+            color: white;
+        }
+        header{
+            background-color: rgb(51, 48, 48);
+            min-width: 100%;
+            height: 60px;
+            font-size: 6vh;
+            font-family: sans-serif;
+            line-height: 60px;
+            text-align: center;
+        }
+        nav{
+            width: 100%;
+            background-color:rgb(30, 29, 29);
+            height: 50px;
+            overflow: hidden;
+        }
+        nav > ul > li{
+            display: inline-block;
+            margin:0px 1% 0px 16% ;
+            line-height: 50px;
+           
+            
+        }
+        nav > ul > li:hover{
+            background-color: green;
+            
+        }
+        nav > ul > li > a{
+            text-decoration: none;
+        }
+        .container{
+            width: 70%;
+           height: 300px;
+           margin:  auto;
+           background-color: rgb(47, 46, 46);
+           padding-top: 100px;
+           padding-left:20% ;
+           border-radius: 50px;
+           box-shadow: 0px 0px 20px cyan;
+          
+          
+        }
+        tr{
+            height: 40px;
+        }
+        input{
+            margin-left:20% ;
+            color:black
+        }
+        h1{
+            text-align: center;
+            margin-top: 100px;
+        }
+       
+    </style>
+</head>
+<body>
+   <header>Rakesh IT Solutions</header>
+   <nav>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Solutions</a></li>
+    </ul>
+   </nav>
+   <h1>Login Page</h1>
+   <div class="container">
+    <form name="form1" action="RetrieveData.jsp" method="post">
+        <table align=center width="60%" >
+
+        <tr>
+            <td>User ID:</td>
+            <td><input type=number id=uid  name=uid class="myData" required>
+            </td>
+        </tr>
+        <tr>
+            <td>User Name:</td>
+            <td><input type=text id=uname name=uname class="myData" required>
+            </td>
+        </tr>
+
+
+        <tr><td><input type="submit" class="myButton" value="Login" ></td><td><input type="reset" class="myButton" value="Reset"></td></tr>
+
+        </table>
+    </form>
+   </div>
+
+</body>
+</html>

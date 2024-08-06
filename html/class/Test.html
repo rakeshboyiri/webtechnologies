@@ -50,8 +50,8 @@
 <body>
     <form >
         
-        <input type="range"  min="1" value="50" max="100" oninput="this.nextElementSibling.value=this.value">
-        <output>0</output>
+        <input type="range"  min="1" value="50" max="100" oninput="this.nextElementSibling.innerHTML=this.value">
+        <p style="display:inline-block;"> 0</p>
 
         <input list="browsers" name="browser" id="browser">
         <datalist id="browsers">
